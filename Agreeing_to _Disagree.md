@@ -18,4 +18,32 @@ q_i(\omega)={p(A \cap\ P_i(\omega))\over p(P_i(\omega))}
 $$
 举例：
 
-对于样本空间$\Omega={\alpha,\beta,\gamma,\delta}$有2种划分：$T_1={\alpha\beta, \gamma\delta}$，$T_2={\alpha\beta\gamma,\delta}$，
+对于样本空间$\Omega={\alpha,\beta,\gamma,\delta}$有2种划分：$T_1={\alpha\beta, \gamma\delta}$，$T_2={\alpha\beta\gamma,\delta}$，$A=(\alpha\delta)$，$\omega=\alpha$。
+
+所以有：$P_1(\omega)=(\alpha\beta)$，有$A \cap P_1 = (\alpha)$
+
+那么对于参与者1来说，在信息集$T_1$下的$q_1$为：
+$$
+\begin{equation}\label{eqn:2}
+\begin{aligned}
+q_1
+& = {P(A \cap P_1(\omega))\over P_1(\omega)}\\
+& = {(\alpha) \over (\alpha\beta)} \\
+& = {1 \over 2}
+\end{aligned}
+\end{equation}
+$$
+同理，有：$P_2(\omega)=(\alpha\beta\gamma)$，有$A \cap P_2 = (\alpha)$
+
+那么对于参与者2来说，在信息集$T_2$下的$q_2$为：
+$$
+\begin{equation}\label{eqn:2}
+\begin{aligned}
+q_2
+& = {P(A \cap P_2(\omega))\over P_2(\omega)}\\
+& = {(\alpha) \over (\alpha\beta\gamma)} \\
+& = {1 \over 3}
+\end{aligned}
+\end{equation}
+$$
+**这里参与者1、2对于相同事件A的后验概率不同，是因为他们的信息集划分不同。**这里体现的也是不完美信息博弈的一个特点。
