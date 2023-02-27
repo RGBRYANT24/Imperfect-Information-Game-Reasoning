@@ -12,3 +12,15 @@
 
 ## Proposed Approach
 
+作者将顺序决策过程建模为马尔科夫决策过程五元组MDP（S,A,P,R,$\gamma$）。目标是学习一系列的子任务和相应的子策略，逐个执行每个子任务对应的子策略时可以获得最大的累积奖励。
+
+**建立符号框架**：通过专家知识建立起符号表示框架，用于表述环境规则：捕捉对象、状态转移以及他们的值是如何变化的。SDRL的主要框架如下图：
+
+![Figure 1: Architecture illustration](https://pdf.cdn.readpaper.com/parsed/fetch_target/3543084130dfef8b4227ca9c869b8884_3_Figure_1_785371879.png)
+
+SDRL的执行过程如下：
+
+- 符号求解器（Symbolic Planner）产生高维规划（High-level Plan）。比如包含潜在奖励的一系列子任务
+- 这里引入了内在奖励（intrinsic reward）和外在奖励（extrinsic reward）来评估两个层级（子任务、总任务）任务的学习
+- 基于内在奖励（因为他对应的是子任务）通过DRL进行子任务对应子策略的学习
+- 在子任务学习到一定程度的时候，去评估学习到的子策略。当达到一定的阈值，使用外部奖励，元控制器（Meta-controller）反映长期学习到的奖励，并反馈给符号求解器。
