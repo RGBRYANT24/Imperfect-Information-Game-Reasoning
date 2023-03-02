@@ -63,9 +63,46 @@ $$
 
 ### 规划和学习
 
-<img src="C:\Users\Adrin\AppData\Roaming\Typora\typora-user-images\image-20230301203009917.png" alt="image-20230301203009917" style="zoom:50%;" />
+<img src="https://static.cdn.readpaper.com/aiKnowledge/screenshot/2023-03-02/3b8a4a4b280244c2bb675c051753d3bc/da4db026-2369-4e26-8b45-4ec0d63d349c.png" alt="img" style="zoom:50%;" />
 
 - 对于每一个episode$t$，符号规划器（symbolic planner）产生一个规划$\Pi_t$
-- 每一个规划$\Pi_t$对应一个子任务，让controller通过DQN去学习子策略。
-- 根据子任务的完成情况，再通过R-learning更新Meta-controller。
-- 对当前规划$\Pi_t$进行评估，并更新内在奖励
+- 每一个规划$\Pi_t$产生一系列子任务，让controller与环境交互，通过更新DQN去学习真实环境的reward，产生extrinsic reward。
+- meta-controller根据extrinsic reward通过R-learning对intrinsic reward进行更新，并且传递给symbolic planner
+- 对当前规划$\Pi_t$进行评估，并以此更新内在奖目标
+
+
+
+## Results
+
+#### Taxi Domain
+
+##### Base line：
+
+standard PEORL、SD-RL
+
+##### result
+
+- 一开始收敛没有PEORL和SD-RL快
+  - 探索性没有他俩强
+  - 需要不断找到intrinsic goal
+- 在充分学习到环境之后（Task1）SDRL收敛的和PEORL一样快
+- 随着drop off乘客的奖励逐渐减少，SDRL能学习到去领coupon，其他俩算法就不能
+
+#### Montezuma's Revenge
+
+##### Base line：
+
+hDQN
+
+其他比较对象：double-DQN
+
+##### result
+
+- 学习子任务快
+- 子任务成功率高
+- 收敛也快
+
+## Conclusion
+
+SDRL框架使用显式表示的符号来执行基于内在目标（intrinsic goal）的高级规划，相较于之前的分离模型（hDQN，PEORL）在可解释性上和数据效率上有着很大提升。
+
